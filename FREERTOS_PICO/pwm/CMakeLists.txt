@@ -18,7 +18,11 @@ add_executable(${PROJECT_NAME} main.c)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_LIST_DIR})
 
 # pull in common dependencies
-target_link_libraries(${PROJECT_NAME} pico_stdlib FreeRTOS-Kernel FreeRTOS-Kernel-Heap4)
+target_link_libraries(${PROJECT_NAME}
+    pico_stdlib
+    hardware_pwm
+    FreeRTOS-Kernel
+    FreeRTOS-Kernel-Heap4)
 
 # create map/bin/hex/uf2 file etc.
 pico_add_extra_outputs(${PROJECT_NAME})
