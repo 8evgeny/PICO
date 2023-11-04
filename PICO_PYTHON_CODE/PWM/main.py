@@ -8,7 +8,7 @@ timeInDownMin = 1
 timeInDownMax = 30
 timeInUpMin = 2
 timeInUpMax = 4
-speed = [1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4]
+speed = [1,2,3,4,5,6,1,2,3,4,5,3,1,2,3,4]
 pwm = [
     PWM(Pin(0)),
     PWM(Pin(1)),
@@ -22,7 +22,6 @@ pwm = [
     PWM(Pin(9)),
     PWM(Pin(10)),
     PWM(Pin(11)),
-    PWM(Pin(12)),
     PWM(Pin(12)),
     PWM(Pin(13)),
     PWM(Pin(14)),
