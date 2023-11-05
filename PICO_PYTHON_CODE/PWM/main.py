@@ -5,24 +5,26 @@ from random import randint
 
 
 ########  ПАРАМЕТРЫ ДЛЯ КОРРЕКТИРОВКИ  ##########################################
-#Время ожидания запуска одной звезды (случайная величина от и до)
+#Время ожидания запуска одной звезды в секундах (случайная величина от и до)
 timeInDownMin = 1
 timeInDownMax = 30
 
-#Время максимальной яркости одной звезды (случайная величина от и до)
+#Время максимальной яркости одной звезды в секундах (случайная величина от и до)
 timeInUpMin = 2
 timeInUpMax = 4
 
 #Звезда включена (1) или выключена (0) (всего 16 шт)
-starsOnOff = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+starsOnOff = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
-#Скорость нарастания яркости каждой звездыь (всего 16 шт)
-speed = [1,2,3,4,5,6,1,2,3,4,5,3,1,2,3,4]
+#Скорость нарастания яркости каждой звездыь  (всего 16 шт)
+speed = [1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 3, 1, 2, 3, 4]
 
-numMaxStart=5
+#Максимальное число одновременно запущенных звезд
+numMaxStars=5
 
 
 ####################################################################################
+
 
 
 
@@ -67,8 +69,10 @@ freq = [
     pwm[14].freq(1000),
     pwm[15].freq(1000)
 ]
-duty = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-direction = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+duty = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+direction = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+numStarStarted = 0
+starStarted = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 # Время старта
 startFromDown = [
@@ -119,17 +123,24 @@ def isStart(num):
     else :
         return 0
 
+def plus(num):
+    duty[num] +=speed[num]
+    if duty[num] > 250:
+        duty[num] = 250
+        direction[num] = 0
+        startFromUp[num] = int(round(time())) + randint(timeInUpMin, timeInUpMax)
+
 def setDuty(num):
+    global numStarStarted
     if direction[num] == 1:
-        duty[num] +=speed[num]
-        if duty[num] > 250:
-            duty[num] = 250
-            direction[num] = 0
-            startFromUp[num] = int(round(time())) + randint(timeInUpMin, timeInUpMax)
+        plus(num)
+
     if direction[num] == 0:
         duty[num] -=speed[num]
         if duty[num] < 0:
             duty[num] = 0
+            numStarStarted -= 1
+            starStarted[num] = 0
             direction[num] = 1
             startFromDown[num] = int(round(time())) + randint(timeInDownMin, timeInDownMax)
 
