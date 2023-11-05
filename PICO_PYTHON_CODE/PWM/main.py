@@ -20,7 +20,7 @@ starsOnOff = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 speed = [1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 3, 1, 2, 3, 4]
 
 #Максимальное число одновременно запущенных звезд
-numMaxStars=5
+numMaxStars=3
 
 
 ####################################################################################
@@ -132,7 +132,8 @@ def plus(num):
             direction[num] = 0
             startFromUp[num] = int(round(time())) + randint(timeInUpMin, timeInUpMax)
     if starStarted[num] == 0: #Запускаем звезду
-        if  numStarStarted <= numMaxStars:
+        if  numStarStarted < numMaxStars:
+            starStarted[num] = 1
             numStarStarted +=1
             duty[num] +=speed[num]
 
