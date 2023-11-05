@@ -2,13 +2,35 @@ from machine import Pin, PWM
 from time import sleep
 from time import time
 from random import randint
-import _thread
 
+
+########  ПАРАМЕТРЫ ДЛЯ КОРРЕКТИРОВКИ  ##########################################
+#Время ожидания запуска одной звезды (случайная величина от и до)
 timeInDownMin = 1
 timeInDownMax = 30
+
+#Время максимальной яркости одной звезды (случайная величина от и до)
 timeInUpMin = 2
 timeInUpMax = 4
+
+#Звезда включена (1) или выключена (0) (всего 16 шт)
+starsOnOff = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+
+#Скорость нарастания яркости каждой звездыь (всего 16 шт)
 speed = [1,2,3,4,5,6,1,2,3,4,5,3,1,2,3,4]
+
+numMaxStart=5
+
+
+####################################################################################
+
+
+
+
+
+
+
+
 pwm = [
     PWM(Pin(0)),
     PWM(Pin(1)),
@@ -117,6 +139,9 @@ def setPwn(num):
 while True:
     sleep(0.06)
     for i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]:
-        if isStart(i) == 1:
-            setDuty(i)
-            setPwn(i)
+        if starsOnOff[i] == 1:
+            if isStart(i) == 1:
+                setDuty(i)
+                setPwn(i)
+        if starsOnOff[i] == 0:
+            pwm[i].duty_u16(0)
