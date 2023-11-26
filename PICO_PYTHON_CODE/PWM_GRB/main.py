@@ -13,43 +13,41 @@ timeInDownMax = 30
 timeInUpMin = 2
 timeInUpMax = 4
 
-#Звезда включена (1) или выключена (0) (всего 16 шт)
-starsOnOff = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+#Звезда включена (1) или выключена (0) (всего 15 шт)
+starsOnOff = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
-#Скорость нарастания яркости каждой звездыь  (всего 16 шт)
-speed = [1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 3, 1, 2, 3, 4]
+#Скорость нарастания яркости каждой звездыь  (всего 15 шт)
+speed = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
 #Максимальное число одновременно запущенных звезд
-numMaxStars=5
+numMaxStars=15
 
 
 ####################################################################################
 
 
 
-
-
-
-
-
-
 pwm = [
+#LED_1_RGB
     PWM(Pin(0)),
     PWM(Pin(1)),
     PWM(Pin(2)),
+#LED_2_BGR    
     PWM(Pin(3)),
     PWM(Pin(4)),
     PWM(Pin(5)),
+#LED_3_BGR    
     PWM(Pin(6)),
     PWM(Pin(7)),
     PWM(Pin(8)),
-    PWM(Pin(9)),
-    PWM(Pin(10)),
+#LED_4_BGR    
     PWM(Pin(11)),
     PWM(Pin(12)),
     PWM(Pin(13)),
-    PWM(Pin(14)),
-    PWM(Pin(15))
+#LED_5_RGB   
+    PWM(Pin(18)),
+    PWM(Pin(19)),
+    PWM(Pin(20))  
 ]
 freq = [
     pwm[0].freq(1000),
@@ -66,13 +64,12 @@ freq = [
     pwm[11].freq(1000),
     pwm[12].freq(1000),
     pwm[13].freq(1000),
-    pwm[14].freq(1000),
-    pwm[15].freq(1000)
+    pwm[14].freq(1000)
 ]
-duty = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-direction = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+duty = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+direction = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 numStarStarted = 0
-starStarted = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+starStarted = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 # Время старта
 startFromDown = [
@@ -90,9 +87,8 @@ startFromDown = [
     int(round(time())) + randint(timeInDownMin, timeInDownMax),
     int(round(time())) + randint(timeInDownMin, timeInDownMax),
     int(round(time())) + randint(timeInDownMin, timeInDownMax),
-    int(round(time())) + randint(timeInDownMin, timeInDownMax),
     int(round(time())) + randint(timeInDownMin, timeInDownMax)
-]
+   ]
 
 startFromUp = [
     int(round(time())) + randint(timeInUpMin, timeInUpMax),
@@ -109,9 +105,8 @@ startFromUp = [
     int(round(time())) + randint(timeInUpMin, timeInUpMax),
     int(round(time())) + randint(timeInUpMin, timeInUpMax),
     int(round(time())) + randint(timeInUpMin, timeInUpMax),
-    int(round(time())) + randint(timeInUpMin, timeInUpMax),
     int(round(time())) + randint(timeInUpMin, timeInUpMax)
-]
+   ]
 
 
 def isStart(num):
@@ -127,8 +122,8 @@ def plus(num):
     global numStarStarted
     if starStarted[num] == 1: #Если уже запущена
         duty[num] +=speed[num]
-        if duty[num] > 250:
-            duty[num] = 250
+        if duty[num] > 1000:
+            duty[num] = 1000
             direction[num] = 0
             startFromUp[num] = int(round(time())) + randint(timeInUpMin, timeInUpMax)
     if starStarted[num] == 0: #Запускаем звезду
@@ -154,11 +149,13 @@ def setDuty(num):
         minus(num)
 
 def setPwn(num):
-    pwm[num].duty_u16(duty[num] * duty[num])
+    #pwm[num].duty_u16(duty[num] * duty[num])
+    pwm[num].duty_u16(duty[num])
+
 
 while True:
-    sleep(0.06)
-    for i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]:
+    sleep(0.006)
+    for i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]:
         if starsOnOff[i] == 1:
             if isStart(i) == 1:
                 setDuty(i)
