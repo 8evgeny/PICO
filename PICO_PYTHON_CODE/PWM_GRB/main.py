@@ -122,8 +122,8 @@ def plus(num):
     global numStarStarted
     if starStarted[num] == 1: #Если уже запущена
         duty[num] +=speed[num]
-        if duty[num] > 1000:
-            duty[num] = 1000
+        if duty[num] > 300:
+            duty[num] = 300
             direction[num] = 0
             startFromUp[num] = int(round(time())) + randint(timeInUpMin, timeInUpMax)
     if starStarted[num] == 0: #Запускаем звезду
@@ -149,8 +149,8 @@ def setDuty(num):
         minus(num)
 
 def setPwn(num):
-    #pwm[num].duty_u16(duty[num] * duty[num])
-    pwm[num].duty_u16(duty[num])
+    pwm[num].duty_u16(duty[num] * duty[num])
+    #pwm[num].duty_u16(duty[num])
 
 
 while True:
