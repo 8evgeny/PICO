@@ -129,8 +129,15 @@ def plus(num):
     if starStarted[num] == 0: #Запускаем звезду
         starStarted[num] = 1
         stars[num][0] = randint(0, 1)
+        if stars[num][0] == 1:
+            stars[num][1] = 0
+            stars[num][2] = 0
         stars[num][1] = randint(0, 1)
-        stars[num][2] = randint(0, 1)
+        if stars[num][1] == 1:
+            stars[num][2] = 0
+        if stars[num][2] == 0:    
+            stars[num][2] = 1
+            
         if stars[num][0] == 1:
             duty[num][0] += speed[num]
         if stars[num][1] == 1:
