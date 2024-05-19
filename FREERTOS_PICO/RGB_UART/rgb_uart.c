@@ -21,6 +21,10 @@ int main() {
     gpio_init(RED_PIN);
     gpio_init(GREEN_PIN);
     gpio_init(BLUE_PIN);
+    uart_init(uart0, 115200);
+    // Set the GPIO pin mux to the UART - 0 is TX, 1 is RX
+    gpio_set_function(0, GPIO_FUNC_UART);
+    gpio_set_function(1, GPIO_FUNC_UART);
     gpio_set_dir(RED_PIN, GPIO_OUT);
     gpio_set_dir(GREEN_PIN, GPIO_OUT);
     gpio_set_dir(BLUE_PIN, GPIO_OUT);
@@ -37,6 +41,7 @@ int main() {
         sleep_ms(1000);
         gpio_put(BLUE_PIN, 0);
         sleep_ms(1000);
+        uart_puts(uart0, "Hello world!\r\n");
     }
 #endif
 }
