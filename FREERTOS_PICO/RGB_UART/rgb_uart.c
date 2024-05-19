@@ -29,19 +29,22 @@ int main() {
     gpio_set_dir(GREEN_PIN, GPIO_OUT);
     gpio_set_dir(BLUE_PIN, GPIO_OUT);
     while (true) {
-        gpio_put(RED_PIN, 1);
-        sleep_ms(1000);
-        gpio_put(RED_PIN, 0);
-        sleep_ms(1000);
-        gpio_put(GREEN_PIN, 1);
-        sleep_ms(1000);
-        gpio_put(GREEN_PIN, 0);
-        sleep_ms(1000);
-        gpio_put(BLUE_PIN, 1);
-        sleep_ms(1000);
-        gpio_put(BLUE_PIN, 0);
-        sleep_ms(1000);
-        uart_puts(uart0, "Hello world!\r\n");
+//        gpio_put(RED_PIN, 1);
+//        sleep_ms(1000);
+//        gpio_put(RED_PIN, 0);
+//        sleep_ms(1000);
+//        gpio_put(GREEN_PIN, 1);
+//        sleep_ms(1000);
+//        gpio_put(GREEN_PIN, 0);
+//        sleep_ms(1000);
+//        gpio_put(BLUE_PIN, 1);
+//        sleep_ms(1000);
+//        gpio_put(BLUE_PIN, 0);
+//        sleep_ms(1000);
+//        uart_puts(uart0, "Hello world!\r\n");
+        char ch = uart_getc(uart0);
+        uart_putc(uart0, ch);
+        uart_puts(uart0, "\r\n");
     }
 #endif
 }
