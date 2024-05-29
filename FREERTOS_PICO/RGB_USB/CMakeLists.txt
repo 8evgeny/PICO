@@ -9,8 +9,6 @@ set(CMAKE_CXX_STANDARD 17)
 set(CFG_TUSB_MCU OPT_MCU_RP2040)
 include_directories(${CMAKE_SOURCE_DIR}/../pico-sdk/lib/tinyusb/hw)
 include_directories(${CMAKE_SOURCE_DIR}/../pico-sdk/lib/tinyusb/src)
-#include_directories(${CMAKE_SOURCE_DIR}/../pico-sdk/lib/tinyusb/src/device)
-
 
 # Initialize the SDK
 pico_sdk_init()
@@ -27,7 +25,6 @@ add_executable(rgb_usb
     ${CMAKE_SOURCE_DIR}/../pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c
     ${CMAKE_SOURCE_DIR}/../pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c
     ${CMAKE_SOURCE_DIR}/../pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c
-#    rgb_usb.c
 )
 
 target_include_directories(rgb_usb PRIVATE ${CMAKE_CURRENT_LIST_DIR})

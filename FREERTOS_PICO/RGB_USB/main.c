@@ -70,19 +70,65 @@ static void cdc_task(void)
         uint8_t buf[64];
 
         uint32_t count = tud_cdc_n_read(itf, buf, sizeof(buf));
-if (buf[0] == '1')
-{
-//    setup_gpio();
-    gpio_put(PICO_DEFAULT_LED_PIN, 1);
-    gpio_put(GREEN_PIN, 1);
-}
-if (buf[0] == '0')
-{
-    gpio_put(PICO_DEFAULT_LED_PIN, 0);
-    gpio_put(GREEN_PIN, 0);
-}
-
-
+        if (buf[0] == '0')
+        {
+            gpio_put(PICO_DEFAULT_LED_PIN, 0);
+            gpio_put(GREEN_PIN, 0);
+        }
+        if (buf[0] == '1')
+        {
+        //    setup_gpio();
+            gpio_put(PICO_DEFAULT_LED_PIN, 1);
+            gpio_put(GREEN_PIN, 1);
+        }
+        if (buf[0] == '2')
+        {
+            gpio_put(PICO_DEFAULT_LED_PIN, 1);
+            gpio_put(GREEN_PIN, 1);
+            sleep_ms(1);
+            gpio_put(PICO_DEFAULT_LED_PIN, 0);
+            gpio_put(GREEN_PIN, 0);
+        }
+        if (buf[0] == '3')
+        {
+            gpio_put(PICO_DEFAULT_LED_PIN, 1);
+            gpio_put(GREEN_PIN, 1);
+            sleep_us(500);
+            gpio_put(PICO_DEFAULT_LED_PIN, 0);
+            gpio_put(GREEN_PIN, 0);
+        }
+        if (buf[0] == '4')
+        {
+            gpio_put(PICO_DEFAULT_LED_PIN, 1);
+            gpio_put(GREEN_PIN, 1);
+            sleep_us(400);
+            gpio_put(PICO_DEFAULT_LED_PIN, 0);
+            gpio_put(GREEN_PIN, 0);
+        }
+        if (buf[0] == '5')
+        {
+            gpio_put(PICO_DEFAULT_LED_PIN, 1);
+            gpio_put(GREEN_PIN, 1);
+            sleep_us(300);
+            gpio_put(PICO_DEFAULT_LED_PIN, 0);
+            gpio_put(GREEN_PIN, 0);
+        }
+        if (buf[0] == '6')
+        {
+            gpio_put(PICO_DEFAULT_LED_PIN, 1);
+            gpio_put(GREEN_PIN, 1);
+            sleep_us(200);
+            gpio_put(PICO_DEFAULT_LED_PIN, 0);
+            gpio_put(GREEN_PIN, 0);
+        }
+        if (buf[0] == '7')
+        {
+            gpio_put(PICO_DEFAULT_LED_PIN, 1);
+            gpio_put(GREEN_PIN, 1);
+            sleep_us(100);
+            gpio_put(PICO_DEFAULT_LED_PIN, 0);
+            gpio_put(GREEN_PIN, 0);
+        }
         // echo back to both serial ports
 //        echo_serial_port(0, buf, count);
 //        echo_serial_port(1, buf, count);
