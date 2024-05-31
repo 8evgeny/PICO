@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
-
+set (PICO_SDK_FETCH_FROM_GIT ON)
 # Pull in SDK (must be before project)
-include(/home/evg/SOFT/Github/PICO/FREERTOS_PICO/pico-sdk/external/pico_sdk_import.cmake)
+include(/home/user/pico/pico-sdk/external/pico_sdk_import.cmake)
 
 project(RGB_USB C CXX ASM)
 set(CMAKE_C_STANDARD 11)

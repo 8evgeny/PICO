@@ -70,50 +70,25 @@ static void cdc_task(void)
         uint8_t buf[64];
 
         uint32_t count = tud_cdc_n_read(itf, buf, sizeof(buf));
-        if (buf[0] == '0')
+        if (buf[0] == 'o' && buf[1] == 'n')
+        {
+            gpio_put(PICO_DEFAULT_LED_PIN, 1);
+            gpio_put(GREEN_PIN, 1);
+        }
+        else if (buf[0] == 'o' && buf[1] == 'f' && buf[2] == 'f')
         {
             gpio_put(PICO_DEFAULT_LED_PIN, 0);
             gpio_put(GREEN_PIN, 0);
         }
-        if (buf[0] == '1')
-        {
-        //    setup_gpio();
-            gpio_put(PICO_DEFAULT_LED_PIN, 1);
-            gpio_put(GREEN_PIN, 1);
-        }
-        if (buf[0] == '2')
+        else if (buf[0] == '1')
         {
             gpio_put(PICO_DEFAULT_LED_PIN, 1);
             gpio_put(GREEN_PIN, 1);
-            sleep_ms(1);
+            sleep_us(100);
             gpio_put(PICO_DEFAULT_LED_PIN, 0);
             gpio_put(GREEN_PIN, 0);
         }
-        if (buf[0] == '3')
-        {
-            gpio_put(PICO_DEFAULT_LED_PIN, 1);
-            gpio_put(GREEN_PIN, 1);
-            sleep_us(500);
-            gpio_put(PICO_DEFAULT_LED_PIN, 0);
-            gpio_put(GREEN_PIN, 0);
-        }
-        if (buf[0] == '4')
-        {
-            gpio_put(PICO_DEFAULT_LED_PIN, 1);
-            gpio_put(GREEN_PIN, 1);
-            sleep_us(400);
-            gpio_put(PICO_DEFAULT_LED_PIN, 0);
-            gpio_put(GREEN_PIN, 0);
-        }
-        if (buf[0] == '5')
-        {
-            gpio_put(PICO_DEFAULT_LED_PIN, 1);
-            gpio_put(GREEN_PIN, 1);
-            sleep_us(300);
-            gpio_put(PICO_DEFAULT_LED_PIN, 0);
-            gpio_put(GREEN_PIN, 0);
-        }
-        if (buf[0] == '6')
+        else if (buf[0] == '2')
         {
             gpio_put(PICO_DEFAULT_LED_PIN, 1);
             gpio_put(GREEN_PIN, 1);
@@ -121,11 +96,59 @@ static void cdc_task(void)
             gpio_put(PICO_DEFAULT_LED_PIN, 0);
             gpio_put(GREEN_PIN, 0);
         }
-        if (buf[0] == '7')
+        else if (buf[0] == '3')
         {
             gpio_put(PICO_DEFAULT_LED_PIN, 1);
             gpio_put(GREEN_PIN, 1);
-            sleep_us(100);
+            sleep_us(300);
+            gpio_put(PICO_DEFAULT_LED_PIN, 0);
+            gpio_put(GREEN_PIN, 0);
+        }
+        else if (buf[0] == '4')
+        {
+            gpio_put(PICO_DEFAULT_LED_PIN, 1);
+            gpio_put(GREEN_PIN, 1);
+            sleep_us(400);
+            gpio_put(PICO_DEFAULT_LED_PIN, 0);
+            gpio_put(GREEN_PIN, 0);
+        }
+        else if (buf[0] == '5')
+        {
+            gpio_put(PICO_DEFAULT_LED_PIN, 1);
+            gpio_put(GREEN_PIN, 1);
+            sleep_us(500);
+            gpio_put(PICO_DEFAULT_LED_PIN, 0);
+            gpio_put(GREEN_PIN, 0);
+        }
+        else if (buf[0] == '6')
+        {
+            gpio_put(PICO_DEFAULT_LED_PIN, 1);
+            gpio_put(GREEN_PIN, 1);
+            sleep_us(600);
+            gpio_put(PICO_DEFAULT_LED_PIN, 0);
+            gpio_put(GREEN_PIN, 0);
+        }
+        else if (buf[0] == '7')
+        {
+            gpio_put(PICO_DEFAULT_LED_PIN, 1);
+            gpio_put(GREEN_PIN, 1);
+            sleep_us(700);
+            gpio_put(PICO_DEFAULT_LED_PIN, 0);
+            gpio_put(GREEN_PIN, 0);
+        }
+        else if (buf[0] == '8')
+        {
+            gpio_put(PICO_DEFAULT_LED_PIN, 1);
+            gpio_put(GREEN_PIN, 1);
+            sleep_us(800);
+            gpio_put(PICO_DEFAULT_LED_PIN, 0);
+            gpio_put(GREEN_PIN, 0);
+        }
+        else if (buf[0] == '9')
+        {
+            gpio_put(PICO_DEFAULT_LED_PIN, 1);
+            gpio_put(GREEN_PIN, 1);
+            sleep_us(900);
             gpio_put(PICO_DEFAULT_LED_PIN, 0);
             gpio_put(GREEN_PIN, 0);
         }
